@@ -32,6 +32,11 @@ export const Container = styled.div`
 
 			&.withdraw {
 				color: var(--red);
+
+				&::before {
+					content: '-';
+					margin-right: 0.25rem;
+				}
 			}
 		}
 	}
