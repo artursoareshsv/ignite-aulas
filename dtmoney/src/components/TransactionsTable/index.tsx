@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { Container } from "./styles";
 
-type Transactions = {
+type Transaction = {
     id: number,
-    tittle: string,
-    amount: number,
+    title: string,
+    value: number,
     type: string,
     category: string,
     createdAt: Date
 }
 
 export function TransactionsTable() {
-    const [transactions, setTransactions] = useState<Transactions[]>([]);
+    const [transactions, setTransactions] = useState<Transaction[]>([]);
 
     useEffect(() => {
         api.get("https://localhost:3000/api/transactions")
-            .then(({ data }) => setTransactions(data));
+            .then(({ data }) => setTransactions(data.transactions));
     }, [])
 
 
@@ -37,10 +37,21 @@ export function TransactionsTable() {
                         transactions.map((transaction) => {
                             return (
                                 <tr key={transaction.id}>
-                                    <td>{transaction.tittle}</td>
-                                    <td className={transaction.type}>{transaction.amount}</td>
+                                    <td>{transaction.title}</td>
+                                    <td className={transaction.type}>
+                                        {
+                                            new Intl.NumberFormat('pt-BR', {
+                                                style: 'currency',
+                                                currency: 'EUR'
+                                            }).format(transaction.value)
+                                        }
+                                    </td>
                                     <td>{transaction.category}</td>
-                                    <td>{transaction.createdAt}</td>
+                                    <td>
+                                        {
+                                            new Intl.DateTimeFormat('pt-BR').format(new Date(transaction.createdAt))
+                                        }
+                                    </td>
                                 </tr>
                             );
                         })
