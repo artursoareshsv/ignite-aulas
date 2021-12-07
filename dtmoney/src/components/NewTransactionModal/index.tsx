@@ -83,7 +83,3 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
         </ReactModal>
     );
 }
-
-function TransactionsContext(TransactionsContext: any) {
-    throw new Error("Function not implemented.");
-}
