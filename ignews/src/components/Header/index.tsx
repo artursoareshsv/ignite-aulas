@@ -1,13 +1,13 @@
-import style from './styles.module.scss';
+import styles from './styles.module.scss';
 
 export function Header() {
     return (
-        <header className={style.headerContainer}>
-            <div className={style.headerContent}>
+        <header className={styles.headerContainer}>
+            <div className={styles.headerContent}>
                 <img src="/images/logo.svg" alt="ig.news" />
 
                 <nav>
-                    <a className={style.active}>Home</a>
+                    <a className={styles.active}>Home</a>
                     <a>Posts</a>
                 </nav>
             </div>
