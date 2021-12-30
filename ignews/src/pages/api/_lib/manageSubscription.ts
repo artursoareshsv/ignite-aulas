@@ -3,7 +3,7 @@ import { fauna } from '../../../services/fauna';
 import { stripe } from '../../../services/stripe';
 
 export async function saveSubscription(subscriptionId: string, costumerId: string) {
-	const userRef = fauna.query(query.Select('ref', query.Get(query.Match(query.Index('user_by_stripe_costumer_id'), costumerId))));
+	const userRef = await fauna.query(query.Select('ref', query.Get(query.Match(query.Index('user_by_stripe_costumer_id'), costumerId))));
 	const subscription = await stripe.subscriptions.retrieve(subscriptionId);
 
 	const subscriptionData = {
